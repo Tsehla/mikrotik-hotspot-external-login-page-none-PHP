@@ -1,0 +1,1061 @@
+<html>
+	<head>
+			<title>Wifi Hotspot > login</title>
+
+			<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+			<link rel="stylesheet" href="bootstrap.min.css">
+			<link rel="stylesheet" href="line-awesome/css/line-awesome.css">
+
+
+			<style type="text/css">
+				body {color: #737373; font-size: 12px; font-family: verdana;min-height: 500px}
+
+				img {border: none;}
+				input{
+						font-size: 1.5em;
+						text-align: center;
+					}
+				*::-webkit-input-placeholder {
+					color: blue;
+				}
+				*:-moz-placeholder {/* FF 4-18 */
+					color: blue;
+				}
+				*::-moz-placeholder {/* FF 19+ */
+					color: blue;
+				}
+				*:-ms-input-placeholder {/* IE 10+ */
+					color: blue;
+				}
+			</style>
+
+		</head>
+
+	<body id='page_body'>
+    
+		<!-- login input forms -->
+		<div style="width: 60vw;height: auto; position: absolute; display: none; background-color: antiquewhite; margin-top: 10%;margin-left:20vw;background-image: url(images/black-wood.jpg);background-position: center;background-repeat: no-repeat;background-size: cover" align="center" id="form_container">
+
+			<!-- close button -->
+			<button onclick="document.getElementById('bottom_bar').style.display='block',login_hide()" style="width: 40px; height: 40px; font-size: 1.5em; position: absolute;right: 1%; border: 0px" class="btn btn-info">&times;</button>
+
+			<!-- login overlay background -->
+			<div style="border: 3px double #cccccc; padding: 0px;background-image: url(images/black-wood.jpg); width: 100%;height: 100%">
+
+				<!-- input content -->
+				<!-- hotspot logo -->
+				<p style='color: white;font-size: 15px;font-weight: 500;padding: 0px;border : 0px solid red;height: 70px' id='logo_container'></p>
+				<br/>	
+
+				<!-- top text -->
+				<p style='color: white;font-size: 15px;font-weight: 500;margin: 0px;border : 0px solid red;height: auto' id='logo_container'>Enter</p>
+				<br/>	
+
+				<!-- voucher code input -->
+				<input style="height: 10vh; width: 100%; margin-top:5%;border-radius: 20px" name="username" type="text" value="" placeholder="Voucher code" id='input_voucher_code'/>
+				<br/>
+
+				<!-- or -->
+				<p style='color: white;font-size: 12px;font-weight: 500;margin-top: 30px'>OR</p>
+
+				<!-- username input -->
+				<input style="height: 10vh; width: 100%; margin-top:5%;border-radius: 20px" name="username" type="text" value="" placeholder="Username" id='input_user_name'/>
+
+				<!-- user password input -->
+				<input style="height: 10vh; width: 100%; margin-top:5%;border-radius: 20px" name="password" type="password" placeholder="Password" id='input_password'/>
+
+				<!-- inputs login button -->	
+				<button style="height: 15%; width: 100%; margin-top:4%;margin-bottom:4%" class="btn btn-primary" onclick='form_sender_decider()'>Log in</button>
+
+			 </div>    
+
+		</div>
+
+		<br />
+
+		<!--router error div -->
+		<div style="color: #FF8080; font-size: 1.5em; width: 100%; height: 2em;text-align: center; background-color: dimgrey;border: 2px solid red;display:none" id='error_div'></div>
+
+
+
+		<!-- Page content -->
+
+
+		<!-- iframe --><!-- used to add promotions and click remotely by styling html page attached to mikrotik login as iframe --
+		<iframe style="width:100vw; height: 80vh; overflow-x: auto; overflow-y: scroll; border: 0px" src="https://tsehla.github.io/strwify/index.html" seamless></iframe>
+		-->
+
+    	<!-- navi -->
+        <div id='nav_container'> <!-- chnage href with you link -->
+            <a href='#' onclick='balance()' class='btn btn-primary' role='button' style='margin-left: 20vw; border-bottom-right-radius:0px;border-top-right-radius:0px; '>Balance</a>
+            <button class='btn btn-info' style='border-bottom-right-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:0px;border-top-left-radius:0px' onclick='document.getElementById("help_container").style.display="block"'>HELP</button>
+            <a href='#' onclick='logout()' class='btn btn-primary' role='button' style='border-bottom-left-radius:0px;border-top-left-radius:0px'>LogOut</a>
+        </div>
+        <style>  
+            #nav_container{
+                width: 100vw;
+                height: 70px;
+                display: flex;
+            
+            }
+            #nav_container a{
+                width: 20vw;
+                height: 60px;
+                text-align :center;
+                line-height: 45px;
+                font-size: 0.9em;
+            }
+            #nav_container button{
+                width: 20vw;
+                height: 60px;
+                text-align :center;
+                line-height: 45px;
+                font-size: 18px;
+            }
+            
+           {border: 1px solid blue}
+        
+        </style>
+
+    	<!-- search -->
+        <div id='navi_container'>
+			<button onclick='buy()' class='btn btn-success' style="font-size: 30px">Buy</button>
+            <input type='search' placeholder='Search Google or type URL' class='form-control' id='search'>
+            <button onclick='search()' class='btn btn' style="background: rebeccapurple;">	&#8981;</button>
+        </div>
+        <style>
+            #navi_container {
+                width: 100vw;
+                height: 70px;
+				line-height: 45px;
+				text-align: center;
+                display: flex;
+            }
+            #navi_container input {
+                width: 60vw;
+                height: 80%;
+                margin: 2% 2% 2% 4%;
+                text-align: center;
+            }
+            #navi_container input::placeholder {
+                 font-size: 15px;
+            
+            }
+            #navi_container button {
+                width: 20%;
+                height: 98%;
+                margin-top: 1%;
+                color: snow;
+                font-size: 60px;
+                vertical-align: middle;
+                line-height: 45px;
+            }
+            #navi_container button:active{
+                background-color:black;
+            }
+            
+        </style>
+    	<!-- top arrow -->
+        <div id='top_arrow_container' onclick='document.getElementById("free_sites_container").style.display="block"'>
+            <div id='top_arrow_1' role="button" class='btn btn-default'>&#8679;</div>
+        </div>
+        <style>
+            #top_arrow_container{
+                width: 100vw;
+                height: 80px;
+                margin-top: 4%;
+                margin-top: 4%;
+                text-align: center;
+                
+            }
+    
+            #top_arrow_container div{
+                width: 100%;
+                margin: 0px;
+                padding: 0px;
+            }
+            #top_arrow_container div:nth-child(1) {
+                font-size: 4em;
+                height: Calc(100%/1);
+                color: blue;
+                border: 0px;
+                background-color: transparent;
+                text-shadow : 2px 2px 1px snow;
+                
+            }            
+           
+        
+        </style>
+    	<!-- arrow center -->
+        <div id='center_arrow_container'>
+            <div id='left_arrow'>
+                <div id='left_arrow_1' role="button" class='btn btn-default'>&#8678;</div>
+            </div>
+            <div id='right_arrow'>
+                <div id='right_arrow_1' role="button" class='btn btn-default'>&#8680;</div>
+            </div>
+        </div>
+            
+            <style>
+                #center_arrow_container {
+                    width: 100vw;
+                    height: 80px;
+                    margin: 1vh 0px 0px 0px;
+                    padding: 0px;
+                    display: flex;
+                    text-align: center;
+                }
+                /* left arrow */
+                #left_arrow {
+                    width: 50vw;
+                    height: 100%;
+                }
+                #left_arrow div{
+                    height: 100%;
+                    vertical-align: middle;
+                    line-height: 75px;
+                }
+                #left_arrow div:nth-child(1){
+                    width:100%;
+                    padding: 0px;
+                    margin: 0px;
+                    font-size: 60px;
+                    color : orange;
+                    border: 0px;
+                    background-color: transparent;
+                    text-shadow : 2px 2px 1px snow;
+                } 
+                /* right arrow */
+                #right_arrow {
+                    width: 50vw;
+                    height: 100%;
+                }
+                #right_arrow div:active {
+                background-color :grey;
+                }
+                #right_arrow div{
+                    height: 100%;
+                    vertical-align: middle;
+                    line-height: 75px;
+                    float: right;
+                }
+                #right_arrow div:nth-child(1){
+                    width:100%;
+                    padding: 0px;
+                    margin: 0px;
+                    font-size:60px;
+                    color: orange;
+                    border: 0px;
+                    background-color: transparent;
+                    text-shadow : 2px 2px 1px snow;
+                }
+            </style>
+
+		            <!-- down arrow -->
+             <div id='down_arrow_container' onclick='document.getElementById("notification_container").style.display="block"'>
+                <div id='down_arrow_1' role="button" class='btn btn-default'>&#8681;</div>
+				 <i class="la la-bullhorn" id='notification_alert_icon' aria-hidden="true" style="text-shadow:3px 3px 3px red, 3px 3px 3px blue;font-size: 5em;color: white "></i>
+            </div>
+            <style>
+                #down_arrow_container{
+                    width: 100vw;
+                    height: 80px;
+                    margin-top: 1%;
+                    text-align: center;
+                
+                }
+                #down_arrow_container div:active {
+                background-color :grey;
+                }
+                #down_arrow_container div{
+                    width: 100%;
+                    margin: 0px;
+                    padding: 0px;
+                }
+                #down_arrow_container div:nth-child(1) {
+                    font-size: 60px;
+                    height: Calc(100%/1);
+                    color : green;
+                    border: 0px;
+                    background-color: transparent;
+                    text-shadow : 2px 2px 1px snow;
+					line-height: 75px;
+                } 
+				#notification_alert_icon{
+					display: none;
+				}
+                
+                
+            </style>
+    	<!-- wallpaper links -->
+        
+        <div id='walp_links_container' role='button' class='btn btn-primary'>
+            <p id='walp_links' >no data yet</p>
+        </div>		
+		
+        <style>
+            #walp_links_container {
+                margin-top: 7vh;
+                margin-bottom: 100px;
+                width: 100vw;
+                height:100px;
+                border: 0px;
+                background: rgba(192,192,192,0.2);
+                text-align: center;
+                overflow: auto;
+            }
+            #walp_links_container p{
+                width: 100%;
+                height: auto;
+                padding: 30px 1vw 1vh 1vw;
+                background-color: transparent;
+                color: snow;
+                font-size: 20px;
+                text-shadow : 1px 1px 12px black;
+            }
+        </style>
+		
+		<!-- notification  modal -->
+       <div id='help_container'>
+            <h1>How to use recharge Voucher</h1>
+            <button onclick='document.getElementById("help_container").style.display="none"' class='btn btn-danger'>x</button>
+            <div id='help'>
+                <h2>Recharge</h2>
+               
+                    <ol>
+                        <li>
+                            Open browser 
+                        </li>
+                        <li>
+                            goto <i style='color:green' id='how_to_router_link'></i>
+                        </li>
+                        <li>
+                            Click <i style='color:green'>'CONNECT'</i>
+                        </li>
+                        <li>
+                            Enter <i style='color:green'>VOUCHER</i>
+                        </li>
+						
+						<li id='how_to_buy'></li>
+						
+                    </ol>
+                
+                <h2>Tips</h2>
+                
+                # Check balance
+                    <ol>
+                        <li>
+                            goto <i style='color: green' id='how_to_check_balance'></i>
+                        </li>
+                    </ol>
+                # Login
+                    <ol>
+                        <li>
+                            goto <i style='color: green' id='how_to_log_in'></i>
+                        </li>
+                    </ol>
+                # Logout
+                    <ol>
+                        <li>
+                            goto <i style='color: green' id='how_to_log_out'></i>
+                        </li>
+                    </ol>
+               				
+				
+                <h2>Voucher</h2>
+                <div style="width: auto; height: 200px; background-image: url(static/images/voucher%20template.PNG); background-position: center; background-repeat: no-repeat;background-size: contain"></div>
+            </div>
+       <Marquee role='marquee' id='how_to_bottom_text'></Marquee>
+       </div>
+		<style>
+             #help_container {
+				font-size: 14px;
+                position: fixed;
+                display: none;
+                top : 3vh;
+                left :7vw;
+                width : 85vw;
+                min-height : 500px;
+                max-height : 80vh;
+                background-color : white;
+                box-shadow: 3px 3px 13px blue, -3px -3px 13px blue;
+                overflow-y: auto;
+                overflow-x: hidden;
+                border-radius: 9px;
+              
+           }
+           #help_container h1 {
+                width: 85%;
+                height: 10%;
+                margin-top: 0px;
+                text-align: center;
+                font-size: 1.5em;
+                font-weight: 600;
+                border-bottom:1px solid brown;
+                padding : 0px;
+                vertical-align: middle;
+                line-height: 10vh;
+              
+           }
+           #help_container button {
+                position: absolute;
+                width : 15%;
+                height: 10%;
+                top: 0px;
+                right: 0px;
+                padding: 0px;
+                display : inline;
+                float: right;
+                font-size: 18px;
+                vertical-align: middle;
+                line-height: 5%;
+                border-right: 0px;
+           }
+             #help {
+                width: 85vw;
+                height: auto;
+                margin: 20px 0px 0px 0px;
+                padding : 0px;
+                border-bottom: 1px solid brown;
+                
+           }
+           #help h2 {
+                width :85vw;
+                height: auto;
+                margin: 0px;
+                font-size: 1em;
+                padding:0px;
+                text-align: center;
+                border: 1px solid grey;
+                background-color:darkslategrey;
+                color: snow;
+           }
+           #help a {
+                width: 100vw;
+                height: auto;
+                margin : 1vh 0px 4vh 1vw;
+                display:block;
+                font-size: 1em;
+                color : blue;
+           }
+           #help a:active {
+                color: green;
+           }
+           #help a:visited{
+                color: black;
+           }
+          
+           #help_container marquee {
+                width: 85vw;
+                height: 10%;
+                font-size: 22px;
+                position: static;
+          
+           }
+        </style>
+		
+		
+		 <!-- free web modal -->
+       <div id='free_sites_container'>
+            <h1>FREE WEBSITES</h1>
+            <button onclick='document.getElementById("free_sites_container").style.display="none"' class='btn btn-danger'>x</button>
+            <div id='education'>
+                <h2> EDUCATION</h2>
+				<div id='education_free_links' style="width: auto;height: auto"></div>
+            </div>
+            <div id='work'>
+                <h2>JOBS</h2>
+                <div id='jobs_free_links' style="width: auto;height: auto"></div>
+            </div>
+       <Marquee role='marquee' id='free_sites_bottom_text'></Marquee>
+       </div>
+        <style>
+           #free_sites_container {
+                position: fixed;
+                display: none;
+                top : 3vh;
+                left :7vw;
+                width : 85vw;
+                min-height : 500px;
+                max-height : 80vh;
+                background-color : white;
+                box-shadow: 3px 3px 13px magenta, -3px -3px 13px magenta;
+                overflow-y: auto;/*hidden scrolling*/
+                overflow-x: hidden;
+                border-radius: 9px;
+              
+           }
+           #free_sites_container h1 {
+                width: 85vw;
+                height: 10%;
+                margin-top: 0px;
+                text-align: center;
+                font-size: 15px;
+                font-weight: 600;
+                border-bottom:1px solid brown;
+                padding : 0px;
+                vertical-align: middle;
+                line-height:50px;
+              
+           }
+           #free_sites_container button {
+                position: absolute;
+                width : 10vw;
+                height: 10%;
+                top: 0px;
+                right: 0px;
+                padding: 0px;
+                display : inline;
+                float: right;
+                font-size: 19px;
+                vertical-align: middle;
+                line-height: 1%;
+           }
+           #education {
+                width: 85vw;
+                height: auto;
+                margin: 30px 0px 0px 0px;
+                padding : 0px;
+                border-bottom:1px solid brown;
+           }
+           #education h2 {
+                width :100;
+                height: 25px;
+                margin-left: 10px;
+                font-size: 14px;
+                padding:0px;
+                vertical-align: middle;
+                line-height : 2.5vh;
+           }
+           #education a {
+                width: 100vw;
+                height: 30px;
+                margin : 15px;
+                display:block;
+                font-size: 18px;
+                color : blue;
+           }
+           #education a:active {
+                color: green;
+           }
+           #education a:visited{
+                color: black;
+           }
+           #work {
+                width: 85vw;
+                height: auto;
+                margin: 20px 0px 20px 0px;
+                padding : 0px;
+                
+           }
+           #work h2 {
+                width :100;
+                height: 25px;
+                margin-left: 10px;
+                font-size: 14px;
+                padding:0px;
+                vertical-align: middle;
+                line-height : 2.5vh;
+           }
+           #work a {
+                width: 100vw;
+                height: 30px;
+                margin : 15px;
+                display:block;
+                font-size: 18px;
+                color : blue;
+           }
+           #work a:active {
+                color: green;
+           }
+           #work a:visited{
+                color: black;
+           }
+           #free_sites_container marquee {
+                width: 85vw;
+                height: 10vh;
+                font-size: 20px;
+                position: static;
+          
+           }
+        </style>
+		
+		<!-- notification  modal -->
+       <div id='notification_container'>
+            <h1>ANNOUNCEMENTS</h1>
+            <button onclick='document.getElementById("notification_container").style.display="none"' class='btn btn-danger'>x</button>
+            <div id='notification'></div>
+		   
+       <Marquee role='marquee' id='notification_bottom_text'></Marquee>
+       </div>
+        <style>
+           #notification_container {
+                position: fixed;
+                display: none;
+                top : 3vh;
+                left :7vw;
+                width : 85vw;
+                min-height : 500px;
+                max-height : 80vh;
+                background-color : white;
+                box-shadow: 3px 3px 13px green, -3px -3px 13px green;
+                overflow-y: auto;
+                overflow-x: hidden;
+                border-radius: 9px;
+              
+           }
+           #notification_container h1 {
+                width: 85vw;
+                height: 50px;
+                margin-top: 0px;
+                text-align: center;
+                font-size: 15px;
+                font-weight: 600;
+                border-bottom:1px solid brown;
+                padding : 0px;
+                vertical-align: middle;
+                line-height: 45px;
+              
+           }
+           #notification_container button {
+                position: absolute;
+                width : 10vw;
+                height: 50px;
+                top: 0px;
+                right: 0px;
+                padding: 0px;
+                display : inline;
+                float: right;
+                font-size: 19px;
+                vertical-align: middle;
+                line-height: 1vh;
+           }
+             #notification {
+                width: 85vw;
+                height: auto;
+                margin: 20px 0px 0px 0px;
+                padding : 0px;
+                border-bottom: 1px solid brown;
+                
+           }
+           #notification h2 {
+                width :85vw;
+                height: auto;
+                margin: 0px;
+                font-size: 10px;
+                padding:0px;
+                text-align: center;
+                border: 1px solid grey;
+                background-color: purple;
+                color: snow;
+           }
+           #notification a {
+                width: 80vw;
+                height:auto;
+                margin : 1vh 0px 4vh 1vw;
+                display:block;
+                font-size: 15px;
+                color : blue;
+	           }
+           #notification a:active {
+                color: green;
+           }
+           #notification a:visited{
+                color: black;
+           }
+          
+           #notification_container marquee {
+                width: 85vw;
+                height: 40px;
+                font-size: 22px;
+                position: static;
+          
+           }
+           /*body*/
+           body {
+           background-image: url('slide_images/1.jpg');
+           background-size: 100% 100%;
+           background-repeat : no-repeat;
+           background-position : center;
+           }
+        </style>
+		
+		
+		
+		
+		
+		
+		
+		
+
+
+
+
+
+
+
+		<!-- Router connect button -->   
+		<div id="bottom_bar" style="width:100%; min-height: 54px; max-height:64px ; background-color: #3498db; position: fixed; bottom: 5%" >
+			<button onclick="document.getElementById('bottom_bar').style.display='none',login_display()" class="btn btn-success" style="width: 95px; height:45px; position: absolute; right:5%; margin-top: 4.5px">Connect</button>
+
+
+		</div>
+
+
+		<script type='text/JavaScript' src='jquery-3.3.1.min.js' ></script> 
+		<script type="text/javascript" src="md5.js"></script>
+		<!-- +++++++ get variable from router encoded on link  +++++++ -->
+		<script type="text/javascript" src="qs.js"></script>
+		<script type="text/javascript">
+
+		//++++++++++++++++++login show
+			function login_display(){//show login form
+				document.getElementById("form_container").style.display="block";
+			}
+				function login_hide(){//hide login form
+				document.getElementById("form_container").style.display="none";
+			}
+
+
+		//++++++++++++++++++++++++form processing
+
+		//get varibles from router on link
+		var router_variables_array = qs.get();
+		//console.log(router_variables_array);
+
+		// ++++++++++++++++++++++++++++++Error div 	
+		if(router_variables_array.error){//if error from router
+
+			document.getElementById('error_div').style.display='block';
+			document.getElementById('error_div').innerHTML = router_variables_array.error.replace(/%20/g,' ');
+
+		}
+
+		//++++++++++++++++++++++++form sender
+		function form_sender_decider() {
+
+			var user_name_input_voucher_code = document.getElementById('input_voucher_code').value.toLowerCase();//converted to lower case//easy for Radiusdesk produced voucher since all are in lowercase anyway
+			var user_name_input_user_name = document.getElementById('input_user_name').value;
+			var user_name_input_user_password = document.getElementById('input_password').value;
+
+			//___________________if chap used for login
+			if(router_variables_array["chap-id"]){
+
+				//http-chap//voucher only login
+				if(user_name_input_voucher_code.length != 0 && user_name_input_user_name.length == 0 && user_name_input_user_password.length ==0 ){//something in voucher input
+
+						var hashed_password = hexMD5(router_variables_array["chap-id"] + user_name_input_voucher_code + router_variables_array["chap-challenge"]);
+
+						var form_to_url = router_variables_array["link-login-only"] + '?username=' + user_name_input_voucher_code + '&password=' + hashed_password + '&dst=' + router_variables_array["link-orig"] + '&popup=true';
+
+						//alert(form_to_url);
+						window.open(form_to_url, '_self');
+
+						return;
+					}
+
+					//http-chap//name + password login
+					if(user_name_input_voucher_code.length == 0 && user_name_input_user_name.length != 0 && user_name_input_user_password.length != 0){//nothing in voucher input
+						var hashed_password = hexMD5(router_variables_array["chap-id"] + user_name_input_user_password + router_variables_array["chap-challenge"]);
+						var form_to_url = router_variables_array["link-login-only"] + '?username=' + user_name_input_user_name + '&password=' + hashed_password + '&dst=' + router_variables_array["link-orig"] + '&popup=true';
+						//alert(form_to_url);
+
+						window.open(form_to_url, '_self');
+
+						return;
+					}
+
+						alert('Please fill only Voucher code Or Username and Password.');
+
+						document.getElementById('input_voucher_code').value='';
+						document.getElementById('input_user_name').value='';
+						document.getElementById('input_password').value='';
+
+						return;
+				}
+
+
+
+				//__________________none chap login
+
+					//voucher only login
+					if(user_name_input_voucher_code.length != 0 && user_name_input_user_name.length == 0 && user_name_input_user_password.length ==0){//somethng in voucher input
+
+							var form_to_url = router_variables_array["link-login-only"] + '?username=' + user_name_input_voucher_code + '&password=' + user_name_input_voucher_code + '&dst=' + router_variables_array["link-orig"] + '&popup=true';
+							//alert(form_to_url)
+							window.open(form_to_url, '_self');
+
+						return;
+					}
+
+					//name + password login
+					if(user_name_input_voucher_code.length == 0 && user_name_input_user_name.length != 0 && user_name_input_user_password.length != 0){//nothing in voucher input
+
+							var form_to_url = router_variables_array["link-login-only"] + '?username=' + user_name_input_user_name + '&password=' + user_name_input_user_password + '&dst=' + router_variables_array["link-orig"] + '&popup=true';
+
+							//alert(form_to_url)
+							window.open(form_to_url, '_self');
+
+						return;
+					}
+
+						alert('Please fill only Voucher code Or Username and Password.');
+
+						document.getElementById('input_voucher_code').value='';
+						document.getElementById('input_user_name').value='';
+						document.getElementById('input_password').value='';
+
+						return;
+
+		}
+
+
+		//+++++++++++++++++ db pulled data ++++++++++++++++++++++
+
+		var hotspot_url;//GET it form db//url router hotspot server
+		var hotspot_transaction_server_url;//GET form db server where voucher app runs from	
+		var wall_link_description; //Get wallpaper links data from db
+
+
+		function fill_data_from_db(data_from_db){//function applies data from DB
+
+			//enviroment variables 
+			hotspot_url ='http://streetwifiy.co.za';
+			hotspot_transaction_server_url = 'http://streetwifiy.herokuapp.com/';
+			var logo_image_url = 'images/logo.png';//logo image
+			var how_to_bottom_text = 'Help yourself, To be helped;'//text shown on help menu as marquee
+			var education_free_links =[
+					{link:"https://scholar.google.co.za/", text:"Google scholar"},
+					{link:"https://www.google.com",text:"Search on google"}
+			] ;//free education links
+			
+			var jobs_free_links = [{link:"https://www.google.com",text:"Search on google"}];//free jobs links
+			var free_sites_bottom_text = 'Pass it on, unconditionally help a stranger, a friend, a family member';//free sites bottom text;
+			var notifications_from_db = ['Dare to be diffrents','Dare to write your destiny, Dare to write your destiny,Dare to write your destiny'];//notifications text
+			var notification_bottom_text = 'If it was easy, no one would care. If it was impossible, no one would dare';//notification page bottom text
+			
+			wall_link_description =[//walp data	
+				{image_link :"default_slide_images/1.jpg" , image_status_text : "Five Fingers", image_status_link: "default_slide_images/1.jpg"},	
+				{image_link :"default_slide_images/2.jpg" , image_status_text : "We are One", image_status_link: "default_slide_images/2.jpg"},	
+				{image_link :"default_slide_images/3.jpg" , image_status_text : "Legal for Creatives", image_status_link: "default_slide_images/3.jpg"},	
+				{image_link :"default_slide_images/4.jpg" , image_status_text : "Five Fingers", image_status_link: "default_slide_images/4.jpg"},	
+				{image_link :"default_slide_images/5.jpg" , image_status_text : "Marseillies", image_status_link: "default_slide_images/5.jpg"},	
+				{image_link :"default_slide_images/6.jpg" , image_status_text : " Unarams", image_status_link: "default_slide_images/6.jpg"},	
+				{image_link :"default_slide_images/7.jpg" , image_status_text : "Anrya", image_status_link: "default_slide_images/7.jpg"},	
+				{image_link :"default_slide_images/8.jpg" , image_status_text : "Urban Village", image_status_link: "default_slide_images/8.jpg"},	
+				{image_link :"default_slide_images/9.jpg" , image_status_text : "Nonkuphiri", image_status_link: "default_slide_images/9.jpg"},	
+				{image_link :"default_slide_images/10.jpg" , image_status_text : "Know Your Voucher", image_status_link: "default_slide_images/10.jpg"}
+			];
+
+			
+			//override provided data by using data from db; not necessary but fine
+			
+			if(data_from_db){
+				
+			}
+			
+			
+			
+			
+
+			//logo image adding
+			if(logo_image_url){
+					document.getElementById('logo_container').style.backgroundImage='url('+logo_image_url+')';
+					document.getElementById('logo_container').style.backgroundSize='auto 70px';
+					document.getElementById('logo_container').style.backgroundRepeat='no-repeat';
+					document.getElementById('logo_container').style.backgroundPosition='center';
+			}
+			
+			//+++++++ apply enviroment data
+			
+			//how to link -- enter voucher
+			document.getElementById('how_to_router_link').innerHTML = '<a href="' + hotspot_url + '">' + hotspot_url + '</a>';
+							
+			
+			//	how to link -- status
+			document.getElementById('how_to_check_balance').innerHTML = '<a href="' + hotspot_url + '/status">' + hotspot_url + '/status</a>';
+			
+			//	how to link -- login
+			document.getElementById('how_to_log_in').innerHTML = '<a href="' + hotspot_url + '/login">' + hotspot_url + '/login</a>';
+			
+			//	how to link -- logout
+			document.getElementById('how_to_log_out').innerHTML = '<a href="' + hotspot_url + '/logout">' + hotspot_url + '/logout</a>';
+			//how to link -- buy
+			document.getElementById('how_to_buy').innerHTML = '<a href="' + hotspot_transaction_server_url + '">Click <i style="color:green">BUY</i> Button to buy recharge voucher</a>';
+			//how to link -- bottom text
+			document.getElementById('how_to_bottom_text').innerHTML = how_to_bottom_text ;
+			//free sites -- bottom text
+			document.getElementById('free_sites_bottom_text').innerHTML = free_sites_bottom_text ;
+			//free sites -- bottom text
+			document.getElementById('notification_bottom_text').innerHTML = notification_bottom_text ;
+			
+			
+			//++++++++++++++++++++ free links ++++++++++
+			 //education_free_links  
+			//education
+			if(education_free_links){
+			   	education_free_links.forEach(function(data){
+					$('#education_free_links').append('<a href="'+data.link+'">'+data.text+'</a>');
+				});
+			   }
+			
+			//jobs
+			//jobs_free_links
+			if(jobs_free_links){
+			   	jobs_free_links.forEach(function(data){
+					$('#jobs_free_links').append('<a href="'+data.link+'">'+data.text+'</a>');
+				});
+			 }
+			
+			
+			
+			//++++++++++++++++++++ notifications   ++++++++++	 
+			
+			if(notifications_from_db){//if theres notifications
+				
+				//show announcement icon
+				
+				notifications_from_db.forEach(function(data, index){
+					document.getElementById('notification_alert_icon').style.display='block';
+					var notification_preview = data;//show preview of notification
+					
+					if(data.length > 10){//if notification is creater than 10 characters
+						
+						notification_preview = data.slice(0, 50)+'...';
+					}
+					
+					
+					$('#notification').append('<h2>ANNOUNCE' + (index + 1).toString()  + '</h2><br/><a href="#" onclick=\'this.innerHTML ="'+data+'"\'>' + notification_preview + '</a>');
+				});
+			}
+					
+			
+			
+			
+                
+			
+		}
+		fill_data_from_db();//start function	
+
+			
+
+			
+			
+
+		//++++++++++++++if page accessed from not router redirect
+
+		if(router_variables_array){//not working
+
+		var go_to_home_page = confirm('Please enter this page by conneting to hotspot and Enter : '+hotspot_url+' in your browser to be able to enter voucher codes.\r\rDo you want to go to home page?');
+
+			if(go_to_home_page){//open home page/transaction app
+				if(hotspot_transaction_server_url){//if transact app link given
+					window.open(hotspot_transaction_server_url, '_self');
+				}
+			}
+
+		}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+	    //+++++++++++++++++++++ wallpaper links +++++++++++++
+         
+        //wallpaper changer
+        //wallpaper description
+ 			
+        var current_image_content_tracker = 0;//image tracker
+        
+		//add wallpaper and link on page load	
+        document.getElementById('walp_links').innerHTML = wall_link_description[0].image_status_text;
+        document.getElementById('page_body').style.backgroundImage = 'url(' + wall_link_description[0].image_link + ')';
+		
+		//wallpaper size	
+        document.getElementById('page_body').style.backgroundSize = '100vw 100vh';
+        
+        function walp_changer(){//slideshow
+			
+			//increment when function call
+			current_image_content_tracker = current_image_content_tracker +1;
+			
+			//check if image tracker is still with provided image length rang
+			if(current_image_content_tracker > wall_link_description.length -1){//if image tracker is over image array leng\\reset image traccker
+			   	current_image_content_tracker = 0;
+			   }
+			
+			document.getElementById('page_body').style.backgroundImage = 'url(' + wall_link_description[current_image_content_tracker].image_link + ')';
+
+			document.getElementById('walp_links').innerHTML = wall_link_description[current_image_content_tracker].image_status_text;
+			
+       
+        };
+        
+        
+        var walp_interval =  setInterval(walp_changer, 6000);
+        
+        //++++++++++++++++++manual change
+        
+        document.getElementById('right_arrow_1').onclick = function (){//next image
+			clearInterval(walp_interval);
+			walp_changer();
+        }
+        
+        document.getElementById('left_arrow_1').onclick = function (){//previous image
+			clearInterval(walp_interval);
+			
+			current_image_content_tracker = current_image_content_tracker - 2;
+			
+			if(current_image_content_tracker < 0){
+				
+				current_image_content_tracker = wall_link_description.length -2 ;
+			}
+			
+			walp_changer();
+
+        } 
+        
+        
+         document.getElementById('walp_links_container').onclick=function (){
+			//alert(wall_link_description[current_image_content_tracker].image_status_link)
+			 var image_text_link = wall_link_description[current_image_content_tracker].image_status_link;
+			 
+			 if(image_text_link){
+			 	//alert(document.getElementById('walp_links').textContent);
+			   window.open(wall_link_description[current_image_content_tracker].image_status_link);
+			   
+		 	}
+		 }	
+			
+			
+			
+		//++++++++++++++++++++ hotspot stuff
+		 
+		function logout(){
+			window.open(hotspot_url+'/login'); 
+		 } 
+			
+		function balance(){
+			window.open(hotspot_url+'/status');
+		} 
+		function buy(){
+			window.open(hotspot_transaction_server_url);
+		} 
+		function search(){
+			window.open('https://www.google.com/search?q='+document.getElementById('search').value);
+		}
+			
+		
+			
+			
+
+
+
+		</script>
+	
+	</body>
+</html>
