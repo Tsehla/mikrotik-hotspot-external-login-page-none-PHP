@@ -2,7 +2,7 @@
 Mikrotik External hosted login page
 
 #Instructions
-this page is adoptation of full featured hotspot transaction sever (it runs on nodjs):  
+this page is adoptation of full featured hotspot transaction server (it runs on nodjs):  github.com/Tsehla/strwify_voucher_transaction_auto_management
 
 1)This page can run on any html server, but you will have to change details within the index.html to match yours
 
@@ -15,6 +15,10 @@ this page is adoptation of full featured hotspot transaction sever (it runs on n
 	}
 	
 </script>
+
+OR just upload this page to you mikrotik router :
+
+https://github.com/Tsehla/mikrotik-hotspot-external-login-page-none-PHP/tree/master/hospot_login_page
 
 change : http://EXTERNAL-HOTSPOT-LINK/index.html to url of were you have index.html at
 
