@@ -944,7 +944,7 @@
 
 		//++++++++++++++if page accessed from not router redirect
 
-		if(router_variables_array){//not working
+		if(!router_variables_array.login){//if login:true missing from url link//when not accesssed via hotspot running on router
 
 		var go_to_home_page = confirm('Please enter this page by conneting to hotspot and Enter : '+hotspot_url+' in your browser to be able to enter voucher codes.\r\rDo you want to go to home page?');
 
